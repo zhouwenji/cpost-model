@@ -1,0 +1,445 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3. Parameters and Data &mdash; CPOST v0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=34cd777e"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]], "processEscapes": true}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4. Demand Estimation" href="chap4.html" />
+    <link rel="prev" title="2. Mathematical Framework" href="chap2.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            CPOST
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="chap1.html">1. Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap2.html">2. Mathematical Framework</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Parameters and Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#generation">3.1. Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#transmission">3.2. Transmission</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#storage">3.3. Storage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chap4.html">4. Demand Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CPOST</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">3. Parameters and Data</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/chap3.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="parameters-and-data">
+<h1>3. Parameters and Data<a class="headerlink" href="#parameters-and-data" title="Link to this heading"></a></h1>
+<p>The CPOST model features techno-economic details on power generation, transmission, and electricity storage. Parameters and data are calibrated to 2023 based on various sources, including publicly available data, statistical data, commercial databases, and expert consultation.</p>
+<section id="generation">
+<h2>3.1. Generation<a class="headerlink" href="#generation" title="Link to this heading"></a></h2>
+<p>CPOST includes both renewable and non-renewable power generation technologies:</p>
+<ul class="simple">
+<li><p>Coal w/o CCS: ultra-supercritical units (USC), supercritical units (SC), and subcritical units (Sub-C);</p></li>
+<li><p>Coal w/ CCS: ultra-supercritical units with CCS, supercritical units with CCS;</p></li>
+<li><p>Gas w/o CCS: combined cycle gas turbine (CCGT) and open cycle gas turbine (OCGT);</p></li>
+<li><p>Gas w/ CCS: CCGT with CCS and OCGT with CCS;</p></li>
+<li><p>Biomass w/ CCS;</p></li>
+<li><p>Biomass w/o CCS;</p></li>
+<li><p>Solar: centralized/distributed photovoltaic (PV) power station and solar thermal power plant (concentrated solar power, CSP);</p></li>
+<li><p>Wind: onshore/offshore wind;</p></li>
+<li><p>Nuclear.</p></li>
+<li><p>Hydro.</p></li>
+</ul>
+<p>China’s electricity demand has grown steadily, reaching 9,224 TWh in 2023—a 6.7% increase from the previous year (<a class="reference internal" href="references.html"><span class="std std-doc">CEC, 2023a</span></a>). This growth is primarily driven by rising industrial consumption, which accounts for 85.3% of total demand. Meanwhile, the supply side is still dominated by thermal power (mainly coal-fired plants), although significant structural shifts highlight progress toward a cleaner power sector. By the end of 2023, China’s total installed power generation capacity reached 2,920 GW, a 13.9% increase from 2022. Non-fossil energy sources surpassed half the total capacity for the first time (<a class="reference internal" href="#fig-3-1"><span class="std std-ref">Fig. 3-1</span></a>).</p>
+<figure class="align-center" id="fig-3-1">
+<img alt="_images/fig_3_1.png" src="_images/fig_3_1.png" />
+<figcaption>
+<p><span class="caption-text">Fig. 3-1: Installed capacity mix by technology in 2023 (unit: GW).</span><a class="headerlink" href="#fig-3-1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Electricity consumption in China’s East, Central, West, and Northeast regions grew by 6.9%, 4.3%, 8.1%, and 5.1%, respectively, compared to the previous year. All provinces in China experienced positive growth in total electricity consumption, with six provinces—Hainan, Xizang, Inner Mongolia, Ningxia, Guangxi, and Qinghai—seeing growth rates exceeding 10% (<a class="reference internal" href="references.html"><span class="std std-doc">CEC, 2023a; CEC, 2024; CETP, 2024</span></a>). These figures are used to calibrate the model’s start-year parameters.</p>
+<p>Regarding cost trajectory, the default baseline scenario assumes a downward trend in the costs of power generation technologies (<a class="reference internal" href="#table-3-1"><span class="std std-ref">Table 3-1</span></a>). The model allows for adjustments to the cost of each specific generation technology in different scenario designs.</p>
+<table class="docutils align-default" id="table-3-1">
+<caption><span class="caption-text">Table 3-1: Assumptions for the declining trend in future capacity costs (unit: US$/kW).</span><a class="headerlink" href="#table-3-1" title="Link to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Technology</p></th>
+<th class="head text-right"><p>2025</p></th>
+<th class="head text-right"><p>2030</p></th>
+<th class="head text-right"><p>2035</p></th>
+<th class="head text-right"><p>2040</p></th>
+<th class="head text-right"><p>2045</p></th>
+<th class="head text-right"><p>2050</p></th>
+<th class="head text-right"><p>2055</p></th>
+<th class="head text-right"><p>2060</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Coal w/o CCS</p></td>
+<td class="text-right"><p>631</p></td>
+<td class="text-right"><p>606</p></td>
+<td class="text-right"><p>583</p></td>
+<td class="text-right"><p>563</p></td>
+<td class="text-right"><p>546</p></td>
+<td class="text-right"><p>533</p></td>
+<td class="text-right"><p>523</p></td>
+<td class="text-right"><p>514</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Coal w/ CCS</p></td>
+<td class="text-right"><p>1015</p></td>
+<td class="text-right"><p>932</p></td>
+<td class="text-right"><p>860</p></td>
+<td class="text-right"><p>798</p></td>
+<td class="text-right"><p>753</p></td>
+<td class="text-right"><p>719</p></td>
+<td class="text-right"><p>695</p></td>
+<td class="text-right"><p>668</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Gas w/o CCS</p></td>
+<td class="text-right"><p>325</p></td>
+<td class="text-right"><p>315</p></td>
+<td class="text-right"><p>306</p></td>
+<td class="text-right"><p>298</p></td>
+<td class="text-right"><p>291</p></td>
+<td class="text-right"><p>286</p></td>
+<td class="text-right"><p>282</p></td>
+<td class="text-right"><p>278</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Gas w/ CCS</p></td>
+<td class="text-right"><p>678</p></td>
+<td class="text-right"><p>617</p></td>
+<td class="text-right"><p>564</p></td>
+<td class="text-right"><p>519</p></td>
+<td class="text-right"><p>487</p></td>
+<td class="text-right"><p>463</p></td>
+<td class="text-right"><p>446</p></td>
+<td class="text-right"><p>427</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Biomass w/o CCS</p></td>
+<td class="text-right"><p>1290</p></td>
+<td class="text-right"><p>1231</p></td>
+<td class="text-right"><p>1191</p></td>
+<td class="text-right"><p>1150</p></td>
+<td class="text-right"><p>1113</p></td>
+<td class="text-right"><p>1080</p></td>
+<td class="text-right"><p>1053</p></td>
+<td class="text-right"><p>1032</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Biomass w/ CCS</p></td>
+<td class="text-right"><p>2321</p></td>
+<td class="text-right"><p>2108</p></td>
+<td class="text-right"><p>1936</p></td>
+<td class="text-right"><p>1784</p></td>
+<td class="text-right"><p>1668</p></td>
+<td class="text-right"><p>1580</p></td>
+<td class="text-right"><p>1515</p></td>
+<td class="text-right"><p>1445</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Hydro</p></td>
+<td class="text-right"><p>2168</p></td>
+<td class="text-right"><p>2059</p></td>
+<td class="text-right"><p>1966</p></td>
+<td class="text-right"><p>1873</p></td>
+<td class="text-right"><p>1873</p></td>
+<td class="text-right"><p>1873</p></td>
+<td class="text-right"><p>1873</p></td>
+<td class="text-right"><p>1873</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Nuclear</p></td>
+<td class="text-right"><p>2311</p></td>
+<td class="text-right"><p>2242</p></td>
+<td class="text-right"><p>2173</p></td>
+<td class="text-right"><p>2103</p></td>
+<td class="text-right"><p>2034</p></td>
+<td class="text-right"><p>1965</p></td>
+<td class="text-right"><p>1910</p></td>
+<td class="text-right"><p>1865</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Solar: CSP</p></td>
+<td class="text-right"><p>493</p></td>
+<td class="text-right"><p>394</p></td>
+<td class="text-right"><p>296</p></td>
+<td class="text-right"><p>272</p></td>
+<td class="text-right"><p>251</p></td>
+<td class="text-right"><p>232</p></td>
+<td class="text-right"><p>217</p></td>
+<td class="text-right"><p>205</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Solar: PV</p></td>
+<td class="text-right"><p>393</p></td>
+<td class="text-right"><p>336</p></td>
+<td class="text-right"><p>279</p></td>
+<td class="text-right"><p>256</p></td>
+<td class="text-right"><p>235</p></td>
+<td class="text-right"><p>216</p></td>
+<td class="text-right"><p>201</p></td>
+<td class="text-right"><p>189</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Solar: thermal</p></td>
+<td class="text-right"><p>2329</p></td>
+<td class="text-right"><p>1491</p></td>
+<td class="text-right"><p>1400</p></td>
+<td class="text-right"><p>1309</p></td>
+<td class="text-right"><p>1227</p></td>
+<td class="text-right"><p>1154</p></td>
+<td class="text-right"><p>1095</p></td>
+<td class="text-right"><p>1048</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Wind: onshore</p></td>
+<td class="text-right"><p>600</p></td>
+<td class="text-right"><p>521</p></td>
+<td class="text-right"><p>489</p></td>
+<td class="text-right"><p>457</p></td>
+<td class="text-right"><p>428</p></td>
+<td class="text-right"><p>402</p></td>
+<td class="text-right"><p>378</p></td>
+<td class="text-right"><p>360</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Wind: offshore</p></td>
+<td class="text-right"><p>1383</p></td>
+<td class="text-right"><p>1047</p></td>
+<td class="text-right"><p>808</p></td>
+<td class="text-right"><p>778</p></td>
+<td class="text-right"><p>750</p></td>
+<td class="text-right"><p>726</p></td>
+<td class="text-right"><p>706</p></td>
+<td class="text-right"><p>690</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Storage: battery</p></td>
+<td class="text-right"><p>1237</p></td>
+<td class="text-right"><p>1090</p></td>
+<td class="text-right"><p>1002</p></td>
+<td class="text-right"><p>949</p></td>
+<td class="text-right"><p>917</p></td>
+<td class="text-right"><p>898</p></td>
+<td class="text-right"><p>889</p></td>
+<td class="text-right"><p>884</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Storage: pumped-hydro</p></td>
+<td class="text-right"><p>824</p></td>
+<td class="text-right"><p>798</p></td>
+<td class="text-right"><p>773</p></td>
+<td class="text-right"><p>764</p></td>
+<td class="text-right"><p>757</p></td>
+<td class="text-right"><p>750</p></td>
+<td class="text-right"><p>744</p></td>
+<td class="text-right"><p>740</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>UHV</p></td>
+<td class="text-right"><p>347</p></td>
+<td class="text-right"><p>329</p></td>
+<td class="text-right"><p>325</p></td>
+<td class="text-right"><p>315</p></td>
+<td class="text-right"><p>306</p></td>
+<td class="text-right"><p>299</p></td>
+<td class="text-right"><p>296</p></td>
+<td class="text-right"><p>295</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="transmission">
+<h2>3.2. Transmission<a class="headerlink" href="#transmission" title="Link to this heading"></a></h2>
+<p>The CPOST model divides the subnational power systems into seven grid regions: North, Northeast, East, Central, Northwest, South, and Southwest. The provincial coverage of the above grid boundaries is shown as follows (Hong Kong, Macau, and Taiwan are not included for now):</p>
+<table class="docutils align-default" id="table-3-2">
+<caption><span class="caption-text">Table 3-2: Regional power grid division.</span><a class="headerlink" href="#table-3-2" title="Link to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Region</p></th>
+<th class="head text-left"><p>Provinces</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>North</p></td>
+<td class="text-left"><p>Beijing; Tianjin; Hebei; Shanxi; Inner Mongolia; Shandong</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Northeast</p></td>
+<td class="text-left"><p>Liaoning; Jilin; Heilongjiang</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>East</p></td>
+<td class="text-left"><p>Shanghai; Jiangsu; Zhejiang; Anhui; Fujian</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Central</p></td>
+<td class="text-left"><p>Jiangxi; Henan; Hubei; Hunan</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Northwest</p></td>
+<td class="text-left"><p>Shaanxi; Gansu; Qinghai; Ningxia; Xinjiang</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>South</p></td>
+<td class="text-left"><p>Guangdong; Guangxi; Hainan; Guizhou; Yunnan</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Southwest</p></td>
+<td class="text-left"><p>Chongqing; Sichuan; Xizang</p></td>
+</tr>
+</tbody>
+</table>
+<figure class="align-center" id="fig-3-2">
+<a class="reference internal image-reference" href="_images/fig_3_2.png"><img alt="_images/fig_3_2.png" src="_images/fig_3_2.png" style="width: 70%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fig. 3-2: Map of regional power grid division.</span><a class="headerlink" href="#fig-3-2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Inter-regional power transmission in China mainly relies on ultra-high voltage (UHV) lines. These UHV lines are modeled simplistically, where transmission capabilities between regions are uniformly expressed in transmission capacity (GW). By the end of 2023, China’s transformer and converter equipment capacity, rated at 220 kV and above, reached approximately 5.42 TW(TVA), a year-on-year increase of 5.7%. Specifically, the capacity of 1000 kV AC transformer equipment was around 213 GVA, while ±800 kV and above DC converter equipment had a capacity of approximately 336 GW (<a class="reference internal" href="references.html"><span class="std std-doc">Wang &amp; Cui, 2024</span></a>). To date, 39 UHV transmission projects have been completed nationwide (among them 18 inter-regional projects), enabling a cross-provincial transmission capacity exceeding 300 GW and a cumulative power transmission exceeding 3 PWh (<a class="reference internal" href="references.html"><span class="std std-doc">SASAC, 2024; SGCC, 2024</span></a>). Based on these figures, the model was calibrated to align with the current infrastructure, incorporating the existing list of UHV transmission projects.</p>
+<table class="docutils align-default" id="table-3-3">
+<caption><span class="caption-text">Table 3-3: Current status of inter-regional power transmission (source: compiled by the authors based on public information).</span><a class="headerlink" href="#table-3-3" title="Link to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Start</p></th>
+<th class="head text-left"><p>End</p></th>
+<th class="head text-right"><p>Investment (billion RMB)</p></th>
+<th class="head text-right"><p>Capacity (GW)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>North</p></td>
+<td class="text-left"><p>Central</p></td>
+<td class="text-right"><p>5.7</p></td>
+<td class="text-right"><p>6</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>North</p></td>
+<td class="text-left"><p>East</p></td>
+<td class="text-right"><p>102.9</p></td>
+<td class="text-right"><p>61</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Northwest</p></td>
+<td class="text-left"><p>East</p></td>
+<td class="text-right"><p>86.3</p></td>
+<td class="text-right"><p>55</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>South</p></td>
+<td class="text-left"><p>East</p></td>
+<td class="text-right"><p>45.3</p></td>
+<td class="text-right"><p>13.6</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Northwest</p></td>
+<td class="text-left"><p>Central</p></td>
+<td class="text-right"><p>90.7</p></td>
+<td class="text-right"><p>40</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Southwest</p></td>
+<td class="text-left"><p>East</p></td>
+<td class="text-right"><p>115.7</p></td>
+<td class="text-right"><p>24</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Southwest</p></td>
+<td class="text-left"><p>Central</p></td>
+<td class="text-right"><p>24.4</p></td>
+<td class="text-right"><p>8</p></td>
+</tr>
+</tbody>
+</table>
+<p>UHV transmission projects’ investment costs primarily include infrastructure investment, lines and towers, and in-station equipment. In the CPOST model, the cost of UHV transmission is simplified by calculating the total cost of the transmission project and dividing it by its capacity. Analysis of 18 existing inter-regional UHV transmission projects indicates that the unit capacity cost ranges from <span class="math notranslate nohighlight">\(137 to \)</span>556 per kW, typically showing a negative correlation with capacity. In addition, the construction cost of UHV lines is significantly affected by location and geographical environment. For instance, the construction cost in the southwest mountainous area can reach approximately 5 times that in the central and eastern plain areas (<a class="reference internal" href="#fig-3-3"><span class="std std-ref">Fig. 3-3</span></a>). Future expenditure on transmission capacity expansion can be easily calculated by multiplying the capacity by the corresponding average unit capacity cost specific to the grid region involved.</p>
+<figure class="align-center" id="fig-3-3">
+<img alt="_images/fig_3_3.png" src="_images/fig_3_3.png" />
+<figcaption>
+<p><span class="caption-text">Fig. 3-3: Cost distribution of UHV transmission projects (source: compiled by the authors based on public news).</span><a class="headerlink" href="#fig-3-3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>CPOST can also be used to calculate and analyze scenarios for the future development of power transmission. The future power transmission is expected to continue expanding, as the geographic disparity between China’s clean energy resources and electricity demand necessitates initiatives like ‘West-to-East’ and ‘North-to-South’ power transmission projects to meet the growing demand in central and eastern regions. In CPOST, these changes are calculated with considerations of the announced planning by imposing growth constraints on new transmission capacity in the model. For example, in a baseline scenario (<a class="reference internal" href="#fig-3-4"><span class="std std-ref">Fig. 3-4</span></a> and <a class="reference internal" href="#fig-3-5"><span class="std std-ref">Fig. 3-5</span></a>), it is assumed that by the end of the 14th Five-Year Plan, inter-regional power transmission capacity will increase from 220 GW in 2019 to 360 GW by 2025. This increase includes 127 GW from Northwest China, 94 GW from Southwest China and Yunnan, 93 GW from North China, 15 GW from Northeast China, and 31 GW from other transmission lines. By 2035, total capacity is projected to reach 488 GW; by 2050, it is expected to expand to 631 GW (<a class="reference internal" href="references.html"><span class="std std-doc">GEIDCO, 2020</span></a>).</p>
+<figure class="align-center" id="fig-3-4">
+<a class="reference internal image-reference" href="_images/fig_3_4.png"><img alt="_images/fig_3_4.png" src="_images/fig_3_4.png" style="width: 70%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fig. 3-4: Inter-regional power transmission in 2025.</span><a class="headerlink" href="#fig-3-4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="fig-3-5">
+<img alt="_images/fig_3_5.png" src="_images/fig_3_5.png" />
+<figcaption>
+<p><span class="caption-text">Fig. 3-5: Inter-regional power transmission in 2035 and 2050.</span><a class="headerlink" href="#fig-3-5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="storage">
+<h2>3.3. Storage<a class="headerlink" href="#storage" title="Link to this heading"></a></h2>
+<p>The storage technologies modeled in CPOST include energy storage power stations and pumped-storage hydroelectricity (PSH). The installations are calibrated based on historical data. The Global Hydropower Tracker by Global Energy Monitor provides information on PSH station planning in provinces of China, encompassing announced, planned, and under-construction projects (<a class="reference internal" href="references.html"><span class="std std-doc">GEM, 2024</span></a>). By 2060, the total installed capacity is projected to increase by 291.4 GW compared to 2030, reaching a cumulative capacity of 437.2 GW. The model is adjusted according to the specific circumstances of each province.</p>
+<figure class="align-center" id="fig-3-6">
+<img alt="_images/fig_3_6.png" src="_images/fig_3_6.png" />
+<figcaption>
+<p><span class="caption-text">Fig. 3-6: Pumped storage capacity in provinces (2020).</span><a class="headerlink" href="#fig-3-6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Regarding costs, the model refers to the data from the China Electricity Council and calibrated with other sources (<a class="reference internal" href="references.html"><span class="std std-doc">Dianchacha, 2024; CEC, 2023b; CEC, 2023c</span></a>). In 2020, the average capital cost of PSH stations (5 hours) was approximately <span class="math notranslate nohighlight">\(1422/kW. For chemical energy storage power stations (2 hours), the capital cost is around \)</span>950/kW. The possible declining ratios of these costs in the future are taken from NREL and other literature, and then the costs in 2020 are used as a benchmark to derive future costs (<a class="reference internal" href="references.html"><span class="std std-doc">Cole &amp; Karmakar, 2023</span></a>).</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="chap2.html" class="btn btn-neutral float-left" title="2. Mathematical Framework" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="chap4.html" class="btn btn-neutral float-right" title="4. Demand Estimation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, School of Applied Economics, Renmin University of China.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

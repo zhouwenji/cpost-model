@@ -1,0 +1,448 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2. Mathematical Framework &mdash; CPOST v0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=34cd777e"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]], "processEscapes": true}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="3. Parameters and Data" href="chap3.html" />
+    <link rel="prev" title="1. Overview" href="chap1.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            CPOST
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="chap1.html">1. Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Mathematical Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#sets-and-indices">2.1. Sets and Indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#production-process">2.2. Production Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#objective-function">2.3. Objective Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#constraints">2.4. Constraints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#commodity-balance">2.4.1. Commodity Balance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#unit-commitment-constraints">2.4.2. Unit Commitment Constraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#capacity-constraints">2.4.3. Capacity Constraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#storage-constraints">2.4.4. Storage Constraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#transmission-constraints">2.4.5. Transmission Constraints</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chap3.html">3. Parameters and Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chap4.html">4. Iron and steel module: RMC|Steel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CPOST</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">2. Mathematical Framework</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/chap2.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="mathematical-framework">
+<h1>2. Mathematical Framework<a class="headerlink" href="#mathematical-framework" title="Link to this heading"></a></h1>
+<p>This section presents the model’s optimization framework and the mathematical principles.</p>
+<section id="sets-and-indices">
+<h2>2.1. Sets and Indices<a class="headerlink" href="#sets-and-indices" title="Link to this heading"></a></h2>
+<p>The COPST model is mathematically formulated as a mixed integer linear programming problem (MILP). For some cases that need faster computation, the model could also be simplified to regular linear programming by changing configuration settings and ignoring binary variables, as in unit commitment. <a class="reference internal" href="#table-2-1"><span class="std std-ref">Table 2-1</span></a> below summarizes the core concepts involved in the mathematical programming framework, which are essential for the computational implementation.</p>
+<table class="docutils align-default" id="table-2-1">
+<caption><span class="caption-text">Table 2-1: Symbols and their explanations.</span><a class="headerlink" href="#table-2-1" title="Link to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Symbol</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(n,n'\in N\)</span></p></td>
+<td><p>Nodes</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(p\in P\)</span></p></td>
+<td><p>Processes (e.g., generation technologies)</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(u\in U\)</span></p></td>
+<td><p>Generation units</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(t\in T\)</span></p></td>
+<td><p>Time step (hour)</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(c\in C\)</span></p></td>
+<td><p>Commodities (e.g., electricity, hydrogen, methane, CO<sub>2</sub>, etc.)</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(s\in S\)</span></p></td>
+<td><p>Storage installations (e.g., batteries for electricity storage, pumped hydro, hydrogen storage tanks, etc.)</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(f\in F\)</span></p></td>
+<td><p>Transmission lines (e.g., high-voltage transmission lines for electricity, hydrogen pipelines for hydrogen, etc.)</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(C_{\text{com}},C_{\text{dem}},C_{\text{buy}},C_{\text{sell}},C_{\text{emi}}\subset C\)</span></p></td>
+<td><p>Subsets of commodities, where:<br> - <span class="math notranslate nohighlight">\(C_{\text{com}}\)</span>: regular commodities, e.g., electricity, hydrogen, and others;<br>- <span class="math notranslate nohighlight">\(C_{\text{dem}}\)</span>: demand commodities;<br>- <span class="math notranslate nohighlight">\(C_{\text{buy}},\ C_{\text{sell}}\)</span>: commodities to buy and sell, incl. imported electricity, gas purchased from the market, electricity, hydrogen sold to the market, etc.;<br>- <span class="math notranslate nohighlight">\(C_{\text{emi}}\)</span>: emissions, e.g.: CO<sub>2</sub>, SO<sub>2</sub>, etc.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\((n,p,u)\in NPU\)</span></p></td>
+<td><p>Combination set, unit <span class="math notranslate nohighlight">\(u\)</span> of process <span class="math notranslate nohighlight">\(p\)</span> at node <span class="math notranslate nohighlight">\(n\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(NPU^{\text{noren}}, NPU^{\text{ren}}\subset NPU\)</span></p></td>
+<td><p>Sub-combination set, non-renewable unit <span class="math notranslate nohighlight">\(u\)</span> process <span class="math notranslate nohighlight">\(p\)</span> at node <span class="math notranslate nohighlight">\(n\)</span>, and renewable unit <span class="math notranslate nohighlight">\(u\)</span> process <span class="math notranslate nohighlight">\(p\)</span> at node <span class="math notranslate nohighlight">\(n\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\((n,s,c)\in NSC\)</span></p></td>
+<td><p>Combination set, storage <span class="math notranslate nohighlight">\(s\)</span> of commodity <span class="math notranslate nohighlight">\(c\)</span> at node <span class="math notranslate nohighlight">\(n\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\((n,n',f,c)\in NNFC\)</span></p></td>
+<td><p>Combination sets, transmission <span class="math notranslate nohighlight">\(f\)</span> of commodity <span class="math notranslate nohighlight">\(c\)</span> from node <span class="math notranslate nohighlight">\(n\)</span> to node <span class="math notranslate nohighlight">\(n’\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference internal" href="#table-2-2"><span class="std std-ref">Table 2-2</span></a> provides an overview of the key parameters in the model.</p>
+<table class="docutils align-default" id="table-2-2">
+<caption><span class="caption-text">Table 2-2: Parameters and their explanations.</span><a class="headerlink" href="#table-2-2" title="Link to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(fixedcost_{n,p,u}\)</span></p></td>
+<td><p>Fixed cost of unit <span class="math notranslate nohighlight">\(u\)</span> of process <span class="math notranslate nohighlight">\(p\)</span> at node <span class="math notranslate nohighlight">\(n\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(varcost_{n,p,u}\)</span></p></td>
+<td><p>Variable cost of unit <span class="math notranslate nohighlight">\(u\)</span> of process <span class="math notranslate nohighlight">\(p\)</span> at node <span class="math notranslate nohighlight">\(n\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(startcost_{n,p,u}\)</span></p></td>
+<td><p>Start-up cost of unit <span class="math notranslate nohighlight">\(u\)</span> of process <span class="math notranslate nohighlight">\(p\)</span> at node <span class="math notranslate nohighlight">\(n\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(ramp_{n,p,u}^{\text{up}}\)</span></p></td>
+<td><p>Ramp-up rate of unit <span class="math notranslate nohighlight">\(u\)</span> of process <span class="math notranslate nohighlight">\(p\)</span> at node <span class="math notranslate nohighlight">\(n\)</span>, in percentage of capacity</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(ramp_{n,p,u}^{\text{down}}\)</span></p></td>
+<td><p>Ramp-down rate of unit <span class="math notranslate nohighlight">\(u\)</span> of process <span class="math notranslate nohighlight">\(p\)</span> at node <span class="math notranslate nohighlight">\(n\)</span>, in percentage of capacity</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(cap_{n,p,u}\)</span></p></td>
+<td><p>Capacity of unit <span class="math notranslate nohighlight">\(u\)</span> of process <span class="math notranslate nohighlight">\(p\)</span> at node <span class="math notranslate nohighlight">\(n\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(capfactor_{n,p,u}\)</span></p></td>
+<td><p>Capacity factor of unit <span class="math notranslate nohighlight">\(u\)</span> of process <span class="math notranslate nohighlight">\(p\)</span> at node <span class="math notranslate nohighlight">\(n\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(mincap_{n,p,u}\)</span></p></td>
+<td><p>Minimum capacity of unit <span class="math notranslate nohighlight">\(u\)</span> of process <span class="math notranslate nohighlight">\(p\)</span> at node <span class="math notranslate nohighlight">\(n\)</span> when it is operating</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(rate_{n,p,u,c}^{\text{in}}\)</span></p></td>
+<td><p>Inflow rate coefficient of commodity <span class="math notranslate nohighlight">\(c\)</span> to unit <span class="math notranslate nohighlight">\(u\)</span> of process <span class="math notranslate nohighlight">\(p\)</span> at node <span class="math notranslate nohighlight">\(n\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(rate_{n,p,u,c}^{\text{out}}\)</span></p></td>
+<td><p>Outflow rate coefficient of commodity <span class="math notranslate nohighlight">\(c\)</span> to unit <span class="math notranslate nohighlight">\(u\)</span> of process <span class="math notranslate nohighlight">\(p\)</span> at node <span class="math notranslate nohighlight">\(n\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(storcap_{n,s,c}^{\text{v}}\)</span></p></td>
+<td><p>Volume capacity of storing commodity <span class="math notranslate nohighlight">\(c\)</span> in storage <span class="math notranslate nohighlight">\(s\)</span> at node <span class="math notranslate nohighlight">\(n\)</span>, in the unit of energy (e.g., kWh or MJ)</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(storcap_{n,s,c}^{\text{in}}\)</span></p></td>
+<td><p>Inflow (charging) capacity of storing commodity <span class="math notranslate nohighlight">\(c\)</span> in storage <span class="math notranslate nohighlight">\(s\)</span> at node <span class="math notranslate nohighlight">\(n\)</span>, in the unit of power (e.g., kW)</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(storcap_{n,s,c}^{\text{out}}\)</span></p></td>
+<td><p>Outflow (discharging) capacity of storing commodity <span class="math notranslate nohighlight">\(c\)</span> in storage <span class="math notranslate nohighlight">\(s\)</span> at node <span class="math notranslate nohighlight">\(n\)</span>, in the unit of power (e.g., kW)</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(storinit_{n,s,c}\)</span></p></td>
+<td><p>Initial status of storing commodity <span class="math notranslate nohighlight">\(c\)</span> in storage <span class="math notranslate nohighlight">\(s\)</span> at node <span class="math notranslate nohighlight">\(n\)</span>, percentage</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(storvarcost_{n,s,c}\)</span></p></td>
+<td><p>Variable cost of storing commodity <span class="math notranslate nohighlight">\(c\)</span> in storage <span class="math notranslate nohighlight">\(s\)</span> at node <span class="math notranslate nohighlight">\(n\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(storeff_{n,s,c}^{\text{in}}\)</span></p></td>
+<td><p>Input (charging) efficiency of commodity <span class="math notranslate nohighlight">\(c\)</span> in storage <span class="math notranslate nohighlight">\(s\)</span> at node <span class="math notranslate nohighlight">\(n\)</span>, percentage</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(storeff_{n,s,c}^{\text{out}}\)</span></p></td>
+<td><p>Output (discharging) efficiency of commodity <span class="math notranslate nohighlight">\(c\)</span> in storage <span class="math notranslate nohighlight">\(s\)</span> at node <span class="math notranslate nohighlight">\(n\)</span>, percentage</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(selfdischarge_{n,s,c}\)</span></p></td>
+<td><p>Self-discharging (loss) rate of commodity <span class="math notranslate nohighlight">\(c\)</span> flowing out of storage <span class="math notranslate nohighlight">\(s\)</span> at node <span class="math notranslate nohighlight">\(n\)</span>, percentage</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(transcap_{n,n',f,c}\)</span></p></td>
+<td><p>Transmission capacity of storing commodity <span class="math notranslate nohighlight">\(c\)</span> in storage <span class="math notranslate nohighlight">\(s\)</span> at node <span class="math notranslate nohighlight">\(n\)</span>, in the unit of power (e.g., kW)</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(transvarcost_{n,n',f,c}\)</span></p></td>
+<td><p>Variable cost of transmitting commodity <span class="math notranslate nohighlight">\(c\)</span> via transmission line <span class="math notranslate nohighlight">\(f\)</span> from node <span class="math notranslate nohighlight">\(n\)</span> to node <span class="math notranslate nohighlight">\(n’\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(transeff_{n,n',f,c}\)</span></p></td>
+<td><p>Efficiency for transmitting commodity <span class="math notranslate nohighlight">\(c\)</span> via line <span class="math notranslate nohighlight">\(f\)</span> from node <span class="math notranslate nohighlight">\(n\)</span> to node <span class="math notranslate nohighlight">\(n’\)</span>, percentage (100% - line loss)</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(intermittent_{n,p,t}\)</span></p></td>
+<td><p>Conversion factor of intermittent energy process <span class="math notranslate nohighlight">\(p\)</span> at time step <span class="math notranslate nohighlight">\(t\)</span> at node <span class="math notranslate nohighlight">\(n\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(price_{n,c,t}\)</span></p></td>
+<td><p>Price of commodity <span class="math notranslate nohighlight">\(c\)</span> at time step <span class="math notranslate nohighlight">\(t\)</span> at node <span class="math notranslate nohighlight">\(n\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(demand_{n,c,t}\)</span></p></td>
+<td><p>Demand of commodity <span class="math notranslate nohighlight">\(c\)</span> at time step <span class="math notranslate nohighlight">\(t\)</span> at node <span class="math notranslate nohighlight">\(n\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference internal" href="#table-2-3"><span class="std std-ref">Table 2-3</span></a> lists the variables in the model that are directly associated with the decision-making process:</p>
+<table class="docutils align-default" id="table-2-3">
+<caption><span class="caption-text">Table 2-3: Variables and their explanations.</span><a class="headerlink" href="#table-2-3" title="Link to this table"></a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(ACT_{n,p,u,t}\)</span></p></td>
+<td><p>Activity (generation or output) of unit <span class="math notranslate nohighlight">\(u\)</span> of process <span class="math notranslate nohighlight">\(p\)</span> at time step <span class="math notranslate nohighlight">\(t\)</span> at node <span class="math notranslate nohighlight">\(n\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(ON_{n,p,u,t}\)</span></p></td>
+<td><p>Binary variable, operating status of unit <span class="math notranslate nohighlight">\(u\)</span> of process <span class="math notranslate nohighlight">\(p\)</span> at time step <span class="math notranslate nohighlight">\(t\)</span> at node <span class="math notranslate nohighlight">\(n\)</span>, 1: on; 0: off</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(SWITCH_{n,p,u,t}\)</span></p></td>
+<td><p>Binary variable, action of unit <span class="math notranslate nohighlight">\(u\)</span> of process <span class="math notranslate nohighlight">\(p\)</span> at time step <span class="math notranslate nohighlight">\(t\)</span> at node <span class="math notranslate nohighlight">\(n\)</span>, 1: switch on</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(STORCOM_{n,s,c,t}\)</span></p></td>
+<td><p>Stored amount of commodity <span class="math notranslate nohighlight">\(c\)</span> in storage <span class="math notranslate nohighlight">\(s\)</span> at time step <span class="math notranslate nohighlight">\(t\)</span> at node <span class="math notranslate nohighlight">\(n\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(STORIN_{n,s,c,t}\)</span></p></td>
+<td><p>Inflow (charging) rate of commodity <span class="math notranslate nohighlight">\(c\)</span> in storage installation <span class="math notranslate nohighlight">\(s\)</span> at time step <span class="math notranslate nohighlight">\(t\)</span> at node <span class="math notranslate nohighlight">\(n\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(STOROUT_{n,s,c,t}\)</span></p></td>
+<td><p>Outflow (discharging) rate of commodity <span class="math notranslate nohighlight">\(c\)</span> in storage <span class="math notranslate nohighlight">\(s\)</span> at time step <span class="math notranslate nohighlight">\(t\)</span> at node <span class="math notranslate nohighlight">\(n\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(TRAACT_{n,n',f,c,t}\)</span></p></td>
+<td><p>Flow rate of commodity <span class="math notranslate nohighlight">\(c\)</span> via transmission <span class="math notranslate nohighlight">\(f\)</span> at time step <span class="math notranslate nohighlight">\(t\)</span> from node <span class="math notranslate nohighlight">\(n\)</span> to node <span class="math notranslate nohighlight">\(n’\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="production-process">
+<h2>2.2. Production Process<a class="headerlink" href="#production-process" title="Link to this heading"></a></h2>
+<p>The production process in CPOST captures technologies’ input-output conversion relationships. This relationship can represent various technologies, including power generation, transmission, and storage. Each process is treated with predefined parameters governing its inflows and outflows. The process supports the representation of diverse energy carriers beyond electricity and enables modeling sector-coupling (e.g., hydrogen, methane) in a consistent framework.</p>
+<figure class="align-center" id="fig-2-1">
+<a class="reference internal image-reference" href="_images/fig_2_1.png"><img alt="_images/fig_2_1.png" src="_images/fig_2_1.png" style="width: 70%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fig. 2-1: Representation of the inflows and outflows of a coal-fired generation unit.</span><a class="headerlink" href="#fig-2-1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><a class="reference internal" href="#fig-2-1"><span class="std std-ref">Fig. 2-1</span></a> illustrates a coal-fueled power plant and the associated input and output flows. The generator <span class="math notranslate nohighlight">\(G\)</span> has coal as the input fuel and electricity as the primary output product, while it also emits CO<sub>2</sub> as the secondary output commodity. Three parameters need to be defined then: <span class="math notranslate nohighlight">\(rate^{\text{in}}_{{G,coal}}\)</span>, <span class="math notranslate nohighlight">\(rate^{\text{out}}_{{G,elec}}\)</span>, and <span class="math notranslate nohighlight">\(rate^{\text{in}}_{{G,CO_2}}\)</span>, denoting the inflow rate coefficient for coal, the outflow rate coefficients for electricity and CO<sub>2</sub>, respectively.  Given these three parameters, the model defines only one decision variable, <span class="math notranslate nohighlight">\(ACT_G\)</span>, to represent the activity level of generator <span class="math notranslate nohighlight">\(G\)</span> in a specific circumstance. The electricity output is therefore calculated as <span class="math notranslate nohighlight">\(rate^{\text{out}}_{{G,elec}}\times ACT_G\)</span>, and similarly, the inflow of coal and the CO<sub>2</sub> emissions are <span class="math notranslate nohighlight">\(rate^{\text{in}}_{{G,coal}}\times ACT_G\)</span> and <span class="math notranslate nohighlight">\(rate^{\text{out}}_{{G,CO_2}}\times ACT_G\)</span>, respectively.</p>
+</section>
+<section id="objective-function">
+<h2>2.3. Objective Function<a class="headerlink" href="#objective-function" title="Link to this heading"></a></h2>
+<p>The objective function is to minimize the total cost of the whole electricity system consisting of a variety of components, including capital investments, fixed &amp; variable costs, storage costs, transmission costs, the purchase cost of fuels, the income from selling the produced commodities (as negative costs in the function), and the penalty from emissions. The overall objective function is expressed as:</p>
+<div class="math notranslate nohighlight">
+\[
+totalcost = \min (\zeta_{\text{fixed}} + \zeta_{\text{var}} + \zeta_{\text{stor}} + \zeta_{\text{trans}} + \zeta_{\text{buy}} + \zeta_{\text{sell}} + \zeta_{\text{emi}})\tag{2-1}
+\]</div>
+<p>where the total fixed cost <span class="math notranslate nohighlight">\(\zeta_{\text{fixed}}\)</span> is the sum of all the fixed costs of operating units:</p>
+<div class="math notranslate nohighlight">
+\[
+\zeta_{\text{fixed}} = \sum_{t} \sum_{(n,p,u)\in NPU} fixedcost_{n,p,u}\cdot ON_{n,p,u,t}\tag{2-2}
+\]</div>
+<p>The total variable cost <span class="math notranslate nohighlight">\(\zeta_{\text{var}}\)</span> is the sum of the variable costs for all units. For each unit u, its variable cost is calculated by multiplying the unit variable cost ($/kW) by the generation amount (activities) of each unit (kW) plus the start-up cost if the unit is switched on:</p>
+<div class="math notranslate nohighlight">
+\[
+\zeta_{\text{var}} = \sum_{t} \sum_{(n,p,u)\in NPU}(varcost_{n,p,u}\cdot ACT_{n,p,u,t} + startcost_{n,p,u}\cdot SWITCH_{n,p,u,t})\tag{2-3}
+\]</div>
+<p>The total storage cost <span class="math notranslate nohighlight">\(\zeta_{\text{stor}}\)</span> is the sum of the storage costs for all the storage installations. For each installation <span class="math notranslate nohighlight">\(s\)</span>, the cost is calculated by multiplying the unit variable storage cost by the inflow rate of commodity <span class="math notranslate nohighlight">\(c\)</span> into the installation.</p>
+<div class="math notranslate nohighlight">
+\[
+\zeta_{\text{stor}} = \sum_{t} \sum_{(n,s,c)\in NSC} storvarcost_{n,s,c}\cdot STORIN_{n,s,c,t}\tag{2-4}
+\]</div>
+<p>The total transmission cost <span class="math notranslate nohighlight">\(\zeta_{\text{trans}}\)</span> is the sum of the transmission costs for all the transmission lines. For each line <span class="math notranslate nohighlight">\(f\)</span>, the cost is calculated by multiplying the unit variable transmission cost by the flow rate of commodity <span class="math notranslate nohighlight">\(c\)</span> via the line.</p>
+<div class="math notranslate nohighlight">
+\[
+\zeta_{\text{trans}} = \sum_{t} \sum_{(n,n',f,c)\in NNFC} transvarcost_{n,s,c}\cdot TRAACT_{n,n',f,c,t}\tag{2-5}
+\]</div>
+<p>The total purchasing cost <span class="math notranslate nohighlight">\(\zeta_{\text{buy}}\)</span> is the sum of the fuel costs for all the commodities flowing into all the units. For each installation <span class="math notranslate nohighlight">\(f\)</span>, the fuel cost is calculated by multiplying the unit price of commodity <span class="math notranslate nohighlight">\(c\)</span> with its inflow amounts. Note that the input amounts of commodity <span class="math notranslate nohighlight">\(c\)</span> flowing into generation unit <span class="math notranslate nohighlight">\(u\)</span> is the product of its inflow rate coefficient <span class="math notranslate nohighlight">\(rate^{\text{in}}\)</span> (parameter) and <span class="math notranslate nohighlight">\(ACT\)</span> of generation unit <span class="math notranslate nohighlight">\(u\)</span> (decision variable). The same rule applies to outflow calculation.</p>
+<div class="math notranslate nohighlight">
+\[
+\zeta_{\text{buy}} = \sum_{t} \sum_{(n,p,u)\in NPU} \sum_{c\in C_{\text{buy}}} price_{n,c,t}\cdot rate_{n,p,u,v}^{\text{in}}\cdot ACT_{n,p,u,t}\tag{2-6}
+\]</div>
+<p>The total income <span class="math notranslate nohighlight">\(\zeta_{\text{sell}}\)</span> from selling the product commodity <span class="math notranslate nohighlight">\(c\)</span> is calculated by multiplying the unit price of this product by its output. Note that this item is negative:</p>
+<div class="math notranslate nohighlight">
+\[
+\zeta_{\text{sell}} = -\sum_{t} \sum_{(n,p,u)}\sum_{c\in C_{\text{sell}}} price_{n,c,t}\cdot rate_{n,p,u,v}^{\text{out}}\cdot ACT_{n,p,u,t}\tag{2-7}
+\]</div>
+<p>Finally, the total emission cost <span class="math notranslate nohighlight">\(\zeta_{\text{emi}}\)</span> for emitting commodity <span class="math notranslate nohighlight">\(c\)</span> is calculated by multiplying the unit price of this pollutant (e.g., carbon tax or carbon market price) by its emissions:</p>
+<div class="math notranslate nohighlight">
+\[
+\zeta_{\text{emi}} = \sum_{t} \sum_{(n,p,u)\in NPU} \sum_{c\in C_{\text{emi}}} price_{n,c,t}\cdot rate_{n,p,u,v}^{\text{out}}\cdot ACT_{n,p,u,t}\tag{2-8}
+\]</div>
+</section>
+<section id="constraints">
+<h2>2.4. Constraints<a class="headerlink" href="#constraints" title="Link to this heading"></a></h2>
+<p>The model optimizes the objective function under a set of constraints. These constraints are set for commodity balance (ensures that at each time step <span class="math notranslate nohighlight">\(t\)</span> within each node <span class="math notranslate nohighlight">\(n\)</span>, the total supply of each regular commodity <span class="math notranslate nohighlight">\(c\)</span> equals its total consumption); Unit commitment constraints (ensure that the operating status and the action variable take an appropriate value when units start-up and changes status from the previous time step <span class="math notranslate nohighlight">\(t-1\)</span>); Capacity constraints (limit the activity for each operating unit within the range between the minimum capacity required for keeping the operating status and the maximum capacity of the unit); Storage constraints (ensure that the charging/discharging speed cannot exceed its charging/discharging capacity (or speed limit); Transmission constraints (ensures that the transmission flow of commodity <span class="math notranslate nohighlight">\(c\)</span> could not exceed the capacity of transmission line with the account of the line loss).</p>
+<section id="commodity-balance">
+<h3>2.4.1. Commodity Balance<a class="headerlink" href="#commodity-balance" title="Link to this heading"></a></h3>
+<p>The commodity balance ensures that at each time step <span class="math notranslate nohighlight">\(t\)</span> within each node <span class="math notranslate nohighlight">\(n\)</span>, the total supply of each regular commodity <span class="math notranslate nohighlight">\(c\)</span> equals its total consumption. The left-hand side of Eq. (2-9) is the total supply of commodity <span class="math notranslate nohighlight">\(c\)</span>, containing the outputs of this commodity (outflow) produced from all the generation units, the transmitted amounts from all other nodes to node <span class="math notranslate nohighlight">\(n\)</span>, and the discharged amounts from all the storage installations. The right-hand side is the total consumption of commodity <span class="math notranslate nohighlight">\(c\)</span>, including its final demand at node <span class="math notranslate nohighlight">\(n\)</span>, the amounts consumed for all the generation units, the quantities transmitted from node <span class="math notranslate nohighlight">\(n\)</span> to all other nodes, and the amounts flowing into all the storage installations. This balance holds for every regular commodity <span class="math notranslate nohighlight">\(c\)</span> at every time step <span class="math notranslate nohighlight">\(t\)</span> within every node <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+\begin{aligned}
+&amp;\sum_{(n,p,u)\in NPU} rate_{n,p,u,c}^{\text{out}}\cdot ACT_{n,p,u,t} + \sum_{(n',n,f,c)\in NNFC} transeff_{n',n,f,c}\cdot TRAACT_{n',n,f,c,t} \\
+&amp;+ \sum_{(n,s,c)\in NSC} storeff_{n,s,c}^{\text{dis}}\cdot STOROUT_{n,s,c,t}\\
+&amp;= demand_{n,c,t} + \sum_{(n,p,u)\in NPU} rate_{n,p,u,c}^{\text{in}}\cdot ACT_{n,p,u,t} + \sum_{(n',n,f,c)\in NNFC} TRAACT_{n',n,f,c,t}\\
+&amp;+ \sum_{(n,s,c)\in NSC} storeff_{n,s,c}^{\text{ch}}\cdot STORIN_{n,s,c,t},\ \forall n\in N,\ t\in T,\ c\in C_{\text{com}}
+\end{aligned}
+\tag{2-9}
+\end{equation*}\]</div>
+</section>
+<section id="unit-commitment-constraints">
+<h3>2.4.2. Unit Commitment Constraints<a class="headerlink" href="#unit-commitment-constraints" title="Link to this heading"></a></h3>
+<p>Constraints (2-10)-(2-12) ensure that the operating status <span class="math notranslate nohighlight">\(ON\)</span> and the action variable <span class="math notranslate nohighlight">\(SWITCH\)</span> take an appropriate value <span class="math notranslate nohighlight">\((0,1)\)</span> when unit <span class="math notranslate nohighlight">\(u\)</span> starts up and changes status from the previous time step <span class="math notranslate nohighlight">\(t-1\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+SWITCH_{n,p,u,t}\leq ON_{n,p,u,t}\quad \forall t\in T,\ \forall (n,p,u)\in NPU\tag{2-10}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+SWITCH_{n,p,u,t}\leq 1-ON_{n,p,u,t-1}\quad \forall t\neq 1,\ \forall (n,p,u)\in NPU\tag{2-11}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+ON_{n,p,u,t} - ON_{n,p,u,t-1}\leq SWITCH_{n,p,u,t}\quad \forall t\neq 1,\ \forall (n,p,u)\in NPU\tag{2-12}
+\]</div>
+<p>Constrain (2-13) ensures the change rate of activity for unit <span class="math notranslate nohighlight">\(u\)</span> falls within the range of ramp-up and ramp-down speed limits.</p>
+<div class="math notranslate nohighlight">
+\[
+-ramp_{n,p,u}^{\text{down}}\cdot cap_{n,p,u}\leq ACT_{n,p,u,t}-ACT_{n,p,u,t-1}\leq ramp_{n,p,u}^{\text{up}}\cdot cap_{n,p,u}\quad \forall t\neq 1,\ \forall (n,p,u)\in NPU\tag{2-13}
+\]</div>
+</section>
+<section id="capacity-constraints">
+<h3>2.4.3. Capacity Constraints<a class="headerlink" href="#capacity-constraints" title="Link to this heading"></a></h3>
+<p>Constraint (2-14) limits the activity for each operating unit <span class="math notranslate nohighlight">\(u\)</span> within the range between the minimum capacity required to keep the operating status and the unit’s maximum capacity.</p>
+<div class="math notranslate nohighlight">
+\[
+mincap_{n,p,u}\cdot ON_{n,p,u,t}\leq ACT_{n,p,u,t}\leq cap_{n,p,u}\cdot capfactor_{n,p,u}\cdot ON_{n,p,u,t}\quad \forall t\in T,\forall (n,p,u)\in NPU^{\text{noren}}\tag{2-14}
+\]</div>
+<p>Constraint (2-15) ensures that, for non-dispatchable renewable unit <span class="math notranslate nohighlight">\(u\)</span>, the unit runs at its total capacity if the capacity factor at time step <span class="math notranslate nohighlight">\(t\)</span> is larger than the minimum capacity requirement. Otherwise, the unit is shut down.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    \mathrm{ACT}_{n,p,u,t} =
+    \begin{cases}
+        cap_{n,p,u} \cdot intermittent_{n,p,t} \cdot ON_{n,p,u,t}, &amp; 
+        \text{if } cap_{n,p,u} \cdot intermittent_{n,p,t} &gt; mincap_{n,p,u} \\
+        0, &amp; \text{otherwise}
+    \end{cases}\\
+    \tag{2-15}
+\end{equation*}\]</div>
+<div class="math notranslate nohighlight">
+\[\forall t \in T, \ \forall (n,p,u) \in NPU^{\text{ren}}\]</div>
+</section>
+<section id="storage-constraints">
+<h3>2.4.4. Storage Constraints<a class="headerlink" href="#storage-constraints" title="Link to this heading"></a></h3>
+<p>Constraints (2-16) and (2-17) ensure that the charging/discharging speed (inflow/outflow rate) of commodity <span class="math notranslate nohighlight">\(c\)</span> into/from storage installation <span class="math notranslate nohighlight">\(s\)</span> can not exceed its charging/discharging capacity (or speed limit).</p>
+<div class="math notranslate nohighlight">
+\[
+STORIN_{n,s,c,t}\leq storcap_{n,s,c}^{\text{in}}\quad \forall t\in T,\forall (n,s,c)\in NSC\tag{2-16}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+STOROUT_{n,s,c,t}\leq storcap_{n,s,c}^{\text{out}}\quad \forall t\in T,\forall (n,s,c)\in NSC\tag{2-17}
+\]</div>
+<p>Constraint (2-18) ensures that the stored amount of commodity <span class="math notranslate nohighlight">\(c\)</span> in installation <span class="math notranslate nohighlight">\(s\)</span> can not exceed the volume capacity of <span class="math notranslate nohighlight">\(s\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+STORCOM_{n,s,c,t}\leq storcap_{n,s,c}^{\text{v}}\quad \forall t\in T,\forall (n,s,c)\in NSC\tag{2-18}
+\]</div>
+<p>Constraint (2-19) calculates the initial status of commodity <span class="math notranslate nohighlight">\(c\)</span> in <span class="math notranslate nohighlight">\(s\)</span> when <span class="math notranslate nohighlight">\(t=1\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+STORCOM_{n,s,c,t} = storcap_{n,s,c}^{\text{v}}\cdot storinit_{n,s,c}\quad \forall t=1,\forall (n,s,c)\in NSC\tag{2-19}
+\]</div>
+<p>Constraint (2-20) calculates the energy status change of commodity <span class="math notranslate nohighlight">\(c\)</span> in <span class="math notranslate nohighlight">\(s\)</span> at time step <span class="math notranslate nohighlight">\(t\)</span> from <span class="math notranslate nohighlight">\(t-1\)</span>, by taking account of the inflow, the outflow at <span class="math notranslate nohighlight">\(t\)</span>, and the natural energy loss during the time interval.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+STORCOM_{n,s,c,t} 
+&amp;= (1-selfdischarge_{n,s,c})\cdot STORCOM_{n,s,c,t}\\
+&amp;+ storeff_{n,s,c}^{\text{in}}\cdot STORIN_{n,s,c,t}\\
+&amp;- storeff_{n,s,c}^{\text{out}}\cdot STOROUT_{n,s,c,t}\\
+&amp; \forall t\neq 1,\forall (n,s,c)\in NSC\tag{2-20}
+\end{align*}\]</div>
+</section>
+<section id="transmission-constraints">
+<h3>2.4.5. Transmission Constraints<a class="headerlink" href="#transmission-constraints" title="Link to this heading"></a></h3>
+<p>Constraint (2-20) ensures that the transmission flow of commodity <span class="math notranslate nohighlight">\(c\)</span> could not exceed the capacity of transmission line <span class="math notranslate nohighlight">\(f\)</span>, with account the line loss.</p>
+<div class="math notranslate nohighlight">
+\[
+TRAACT_{n,n',f,c,t} \leq transeff_{n,n',f,c}\cdot transcap_{n,n',f,c}\quad \forall t\in T,\forall (n,n',f,c)\in NNFC\tag{2-20}
+\]</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="chap1.html" class="btn btn-neutral float-left" title="1. Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="chap3.html" class="btn btn-neutral float-right" title="3. Parameters and Data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, School of Applied Economics, Renmin University of China.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
